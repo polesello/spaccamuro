@@ -1,0 +1,321 @@
+:root {
+    --prato: #090;
+    --mattone: #900;
+    --mattone-chiaro: #d62626;
+    --mattone2: #f0d050;
+    --mattone2-chiaro: #fdf076;
+    --punteggio: #9dff9d;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+html, body, #wrapper {
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+}
+
+/* altrimenti non funziona overflow hidden sul body */
+#wrapper {
+    position: relative;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: sans-serif;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.muro {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+#page2 .muro.winner {
+    background: url(img/vinto.jpg) no-repeat center center;
+    background-size: cover;
+    opacity: 1 !important;
+}
+
+#page1 .muro {
+    bottom: 50dvh;
+}
+
+
+
+.muro.player1 {
+    bottom: calc(50dvh + 10px)
+}
+
+.muro.player2 {
+    transform: rotate(180deg);
+    top: 50dvh
+}
+
+.fila {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.mattone {
+    height: 14vw;
+    width: 19vw;
+    background-color: var(--mattone);
+    border: 1px solid #fff;
+    /* 3d effect */
+    box-shadow: 1px -1px 0 var(--mattone-chiaro), 2px -2px 0 var(--mattone-chiaro), 3px -3px 0 var(--mattone-chiaro), 4px -4px 0 var(--mattone-chiaro), 5px -5px 0 var(--mattone-chiaro), 6px -6px 0 var(--mattone-chiaro), 7px -7px 0 var(--mattone-chiaro), 8px -8px 0 var(--mattone-chiaro), 9px -9px 0 var(--mattone-chiaro), 10px -10px 0 var(--mattone-chiaro), 11px -11px 0 var(--mattone-chiaro), 12px -12px 0 var(--mattone-chiaro);
+    transition: all 2s;
+}
+
+.player2 .mattone {
+    background-color: var(--mattone2);
+    box-shadow: 1px -1px 0 var(--mattone2-chiaro), 2px -2px 0 var(--mattone2-chiaro), 3px -3px 0 var(--mattone2-chiaro), 4px -4px 0 var(--mattone2-chiaro), 5px -5px 0 var(--mattone2-chiaro), 6px -6px 0 var(--mattone2-chiaro), 7px -7px 0 var(--mattone2-chiaro), 8px -8px 0 var(--mattone2-chiaro), 9px -9px 0 var(--mattone2-chiaro), 10px -10px 0 var(--mattone2-chiaro), 11px -11px 0 var(--mattone2-chiaro), 12px -12px 0 var(--mattone2-chiaro);
+}
+
+.target {
+    font-weight: bold;
+    font-size: 40px;
+    width: 400px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 99px;
+    position: fixed;
+    top: 30px;
+    left: calc(100vw + 100px);
+    background-color: #000;
+    border: 3px solid #fff;
+    color: #fff;
+    padding-left: 30px;
+    transition: left .3s;
+}
+
+.player1.active + .target {
+    left: calc(100vw - 100px);
+}
+
+.player2 + .target {
+    left: auto;
+    bottom: 30px;
+    right: calc(100vw + 100px);
+    top: auto;
+    transform: rotate(180deg);
+    transition: right .3s;
+}
+
+.player2.active + .target {
+    right: calc(100vw - 100px);
+}
+
+#page2 .muro {
+    opacity: .5;
+}
+
+#page2 .muro.active {
+    opacity: 1;
+}
+
+.mattone.caduto {
+    transform: translateY(1000px) rotate(30deg);
+    background-color: black;
+    position: relative;
+    z-index: 100
+}
+
+
+.prato {
+    background-color: var(--prato);
+    position: absolute;
+    left: 0;
+    right: 0;
+    color: #fff;
+    display: flex;
+}
+
+.prato .istruzioni {
+    margin: 60px 20px 0;
+    width: 50%;
+}
+.prato .istruzioni:first-child {
+    text-align: right;
+}
+
+#page1 .prato {
+    height: 50dvh;
+    bottom: 0;
+}
+
+#page2 .prato {
+    height: 10px;
+    top: calc(50dvh - 10px);
+}
+
+
+
+
+#colpo {
+    background-color: var(--prato);
+    display: none !important;
+}
+
+#page1, #page2 {
+    position: absolute;
+    inset: 0;
+}
+
+#page2 {
+    display: none;
+}
+
+.title, .stop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    z-index: 50;
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+.title {
+    right: 0;
+    text-align: center;
+}
+
+.title img {
+    max-height: 30vh;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.title .external {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.title a, .title input, .stop {
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.title a, .stop {
+    background-color: var(--mattone);
+}
+
+.title input {
+    background-color: var(--mattone2);
+    color: #000;
+}
+
+.stop {
+    left: 20px;
+    top: 20px;
+    padding: 0;
+    font-size: 30px;
+}
+
+.buttons {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    z-index: 100;
+    height: 100px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+.fadeout {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.buttons button {
+    cursor: pointer;
+    border: 3px solid #fff;
+    background: var(--mattone) no-repeat center;
+    background-size: auto 80%;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 80px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.buttons #player2 {
+    background-color: var(--mattone2);
+}
+
+.buttons button:active {
+    transform: scale(.9);
+}
+
+#player1 {
+    background-image: url(img/player1.png);
+}
+
+#player2 {
+    background-image: url(img/player2.png);
+}
+
+
+@media (orientation:landscape) {
+    body {
+        background-color: #000;
+    }
+    #page2 {
+        transform: rotate(-3deg);
+    }
+    .mattone {
+        height: 8vh;
+        width: 8vh;
+        border-radius: 50%;
+        background: #333 url(img/pomodoro.png) no-repeat center center;
+        background-size: 75%;
+    }
+    .player2 .mattone {
+        background: #ccc url(img/olive.png) no-repeat center center;
+        background-size: 75%;
+    }
+    .mattone.caduto {
+        transform: translate(-2000px, 100px) rotate(500deg);
+    }
+}
