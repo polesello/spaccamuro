@@ -26,6 +26,7 @@ html, body, #wrapper {
 body {
     padding: 0;
     margin: 0;
+    height: 100vh;
     height: 100dvh;
     display: flex;
     flex-direction: column;
@@ -54,18 +55,21 @@ img {
 }
 
 #page1 .muro {
+    bottom: 50vh;
     bottom: 50dvh;
 }
 
 
 
 .muro.player1 {
-    bottom: calc(50dvh + 10px)
+    bottom: calc(50vh + 10px);
+    bottom: calc(50dvh + 10px);
 }
 
 .muro.player2 {
     transform: rotate(180deg);
-    top: 50dvh
+    top: 50vh;
+    top: 50dvh;
 }
 
 .fila {
@@ -73,6 +77,24 @@ img {
     justify-content: center;
     position: relative;
 }
+
+.fila:nth-child(1) {
+    z-index: 5;
+}
+.fila:nth-child(2) {
+    z-index: 4;
+}
+.fila:nth-child(3) {
+    z-index: 3;
+}
+.fila:nth-child(4) {
+    z-index: 2;
+}
+.fila:nth-child(5) {
+    z-index: 1;
+}
+
+
 .mattone {
     height: 14vw;
     width: 19vw;
@@ -156,12 +178,14 @@ img {
 }
 
 #page1 .prato {
+    height: 50vh;
     height: 50dvh;
     bottom: 0;
 }
 
 #page2 .prato {
     height: 10px;
+    top: calc(50vh - 10px);
     top: calc(50dvh - 10px);
 }
 
@@ -220,12 +244,15 @@ img {
     text-decoration: none;
     color: #fff;
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    border-radius: 3px;
-    line-height: 30px;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    line-height: 32px;
     text-align: center;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0;
 }
 
 .title a, .stop {
@@ -235,6 +262,14 @@ img {
 .title input {
     background-color: var(--mattone2);
     color: #000;
+}
+
+.title a.figherie {
+    background-color: #000;
+    color: #89b758;
+    border: 2px solid;
+    box-shadow: 3px 3px;
+
 }
 
 .stop {
@@ -271,6 +306,7 @@ img {
     text-align: center;
     width: 100px;
     height: 100px;
+    padding: 0;
     line-height: 100px;
     font-size: 80px;
     border-radius: 50%;
@@ -314,8 +350,24 @@ img {
     .player2 .mattone {
         background: #ccc url(img/olive.png) no-repeat center center;
         background-size: 75%;
+        transition-duration: 4s;
     }
     .mattone.caduto {
-        transform: translate(-2000px, 100px) rotate(500deg);
+        transform: translate(-1000px, 100px) rotate(500deg);
+    }
+    .prato {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .prato .istruzioni {
+        margin-top: 0;
+    }
+    .buttons {
+        margin: 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+    #page2 .muro.winner {
+        background-size: auto 150%;
     }
 }

@@ -3,16 +3,8 @@ self.addEventListener('install', e => {
     e.waitUntil(caches.open('muro_cache').then(
         cache => {
             return cache.addAll([
-                '',
-                'index.html',
-                'spaccamuro.js',
-                'style.css',
-                'img/logo.png',
-                'img/player1.png',
-                'img/player2.png',
-                'img/pomodoro.png',
-                'img/olive.png',
-                'img/vinto.jpg',
+                '/',
+                '/index.html',
             ]).then(() => self.skipWaiting());
         }))
 });
